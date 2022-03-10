@@ -67,5 +67,9 @@ jobs:
         ls -l /home/runner/work/angular-starter/angular-starter/angular-starter
         echo ---tree .---
         tree .
+        ---ls -l /home/runner/work/angular-starter---
+        ls -l /home/runner/work/angular-starter
+        ---ls -l /home/runner/work---
+        ls -l /home/runner/work
         
     
