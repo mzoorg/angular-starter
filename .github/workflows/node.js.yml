@@ -1,7 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Test Node.js CI
+name: Test task Node.js CI
 
 on:
   push:
@@ -13,7 +10,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -40,11 +36,12 @@ jobs:
     needs: [build]
     
     steps:
-    
-    - name: Download math result for job 1
+    - uses: actions/checkout@v2
+    - name: Download art
       uses: actions/download-artifact@v3
       with:
         name: art
+        path: dist
     
     - name: Set up Docker Buildx
       id: buildx
@@ -56,9 +53,6 @@ jobs:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    
-    - name: Debug
-      run: ls -la
     
     - name: Package and push
       uses: docker/build-push-action@v2
