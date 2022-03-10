@@ -3,9 +3,7 @@
 
 name: Test Node.js CI
 
-on:
-  push:
-    branches: [ master ]
+on: workflow_dispatch
 
 env:
   REGISTRY: ghcr.io
@@ -59,15 +57,15 @@ jobs:
     
     - name: Debug
       run: |
-        echo pwd
+        echo ---pwd---
         pwd
-        echo ls -la
+        echo ---ls -la---
         ls -la
-        echo ls -l /home/runner/work/angular-starter/angular-starter
+        echo ---ls -l /home/runner/work/angular-starter/angular-starter---
         ls -l /home/runner/work/angular-starter/angular-starter
-        echo ls -l /home/runner/work/angular-starter
-        ls -l /home/runner/work/angular-starter
-        echo ls -l /
-        ls -l /
+        echo ---ls -l /home/runner/work/angular-starter/angular-starter/angular-starter---
+        ls -l /home/runner/work/angular-starter/angular-starter/angular-starter
+        echo ---tree .---
+        tree .
         
     
