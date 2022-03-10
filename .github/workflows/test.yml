@@ -1,6 +1,8 @@
 name: Test task Node.js CI
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [ test-branch ]
 
 env:
   REGISTRY: ghcr.io
