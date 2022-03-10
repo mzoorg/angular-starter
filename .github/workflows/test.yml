@@ -1,9 +1,8 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: Test task Node.js CI
 
-name: Test test test
-
-on: workflow_dispatch
+on:
+  push:
+    branches: [ master ]
 
 env:
   REGISTRY: ghcr.io
@@ -11,7 +10,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +41,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: art
-        path: ./docker/dist
+        path: dist
     
     - name: Set up Docker Buildx
       id: buildx
@@ -58,21 +56,16 @@ jobs:
     
     - name: Debug
       run: |
-        echo ---pwd---
+        echo pwd
         pwd
         echo ---ls -la---
         ls -la
-        echo ---ls -l /home/runner/work/angular-starter/angular-starter---
-        ls -l /home/runner/work/angular-starter/angular-starter
-        echo ---ls -l /home/runner/work/angular-starter/angular-starter/angular-starter---
-        ls -l /home/runner/work/angular-starter/angular-starter/angular-starter
-        echo ---tree .---
+        echo tree .
         tree .
-        echo ---ls -l /home/runner/work/angular-starter---
-        ls -l /home/runner/work/angular-starter
-        echo ---ls -l /home/runner/work---
-        ls -l /home/runner/work
-        echo ---ls docker---
-        ls -l ./docker
-        
-    
+
+    - name: Package and push
+      uses: docker/build-push-action@v2
+      with:
+        context: ./docker/
+        push: true
+        tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
