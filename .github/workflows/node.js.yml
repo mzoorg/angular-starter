@@ -41,7 +41,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: art
-        path: dist
+        path: ./docker/dist
     
     - name: Set up Docker Buildx
       id: buildx
