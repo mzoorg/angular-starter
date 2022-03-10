@@ -38,11 +38,12 @@ jobs:
     needs: [build]
     
     steps:
-    
+    - uses: actions/checkout@v2
     - name: Download art
       uses: actions/download-artifact@v3
       with:
         name: art
+        path: ./docker/dist
     
     - name: Set up Docker Buildx
       id: buildx
@@ -71,5 +72,7 @@ jobs:
         ls -l /home/runner/work/angular-starter
         echo ---ls -l /home/runner/work---
         ls -l /home/runner/work
+        echo ---ls docker---
+        ls -l ./docker
         
     
