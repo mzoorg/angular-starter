@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  angularapp:
+    image: ghcr.io/mzoorg/angular-starter:latest
+    ports:
+      - "8080:80"
+  
